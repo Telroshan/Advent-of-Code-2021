@@ -185,14 +185,8 @@ func main() {
 		}
 	}
 	
-	fmt.Println("STEP 0")
-	printImage(image, imageWidth, imageHeight)
-
-	for i := 0; i < 2; i++ {
-		fmt.Println("\n\n---------\nSTEP", i + 1)
+	for i := 0; i < 50; i++ {
 		image, imageWidth, imageHeight = enhanceImage(image, enhancementTable, imageWidth, imageHeight, i)
-		
-		printImage(image, imageWidth, imageHeight)
 	}
 
 	litPixelsCount := 0
