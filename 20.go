@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func enhanceImage(image []uint8, enhancementTable []uint8, imageWidth int, imageHeight int) (
+func enhanceImage(image []uint8, enhancementTable []uint8, imageWidth int, imageHeight int, step int) (
 	newImage []uint8, newImageWidth int, newImageHeight int) {
 	newImageWidth = imageWidth + 2
 	newImageHeight = imageHeight + 2
@@ -24,6 +24,8 @@ func enhanceImage(image []uint8, enhancementTable []uint8, imageWidth int, image
 						if image[inputY * imageWidth + inputX] > 0 {
 							inputValue = 1
 						}
+					} else if step%2 == 1 {
+						inputValue = 1
 					}
 					
 					outputValue |= (inputValue << (8 - bitIndex))
@@ -186,9 +188,9 @@ func main() {
 	fmt.Println("STEP 0")
 	printImage(image, imageWidth, imageHeight)
 
-	for i := 1; i <= 2; i++ {
-		fmt.Println("\n\n---------\nSTEP", i)
-		image, imageWidth, imageHeight = enhanceImage(image, enhancementTable, imageWidth, imageHeight)
+	for i := 0; i < 2; i++ {
+		fmt.Println("\n\n---------\nSTEP", i + 1)
+		image, imageWidth, imageHeight = enhanceImage(image, enhancementTable, imageWidth, imageHeight, i)
 		
 		printImage(image, imageWidth, imageHeight)
 	}
